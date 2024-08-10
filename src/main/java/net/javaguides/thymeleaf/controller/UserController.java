@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.List;
+
 @Controller
 public class UserController {
 
@@ -44,5 +46,34 @@ public class UserController {
     public String linkExpression(Model model) {
         model.addAttribute("id", 1);
         return "link-expression";
+    }
+
+    // http://localhost:8080/users
+    @GetMapping("/users")
+    public String users(Model model) {
+        User admin = new User("Admin", "admin@gamil.com", "ADMIN", "Male");
+        User ramesh = new User("Ramesh","ramesh@gmail.com","USER", "Male");
+        User ngocanh = new User("Meena", "meena@gmail.com", "USER", "FEMALE");
+        List<User> users = List.of(admin,ramesh,ngocanh);
+        model.addAttribute("users", users);
+        return "users";
+    }
+
+    // http://localhost:8080/if-unless
+    @GetMapping("/if-unless")
+    public String ifUnless(Model model) {
+        User admin = new User("Admin", "admin@gamil.com", "ADMIN", "Male");
+        User ramesh = new User("Ramesh","ramesh@gmail.com","USER", "Male");
+        User ngocanh = new User("Meena", "meena@gmail.com", "USER", "FEMALE");
+        List<User> users = List.of(admin,ramesh,ngocanh);
+        model.addAttribute("users", users);
+        return "if-unless";
+    }
+
+    @GetMapping("switch-case")
+    public String switchCase(Model model) {
+        User admin = new User("Admin", "admin@gamil.com", "ADMIN", "Male");
+        model.addAttribute("user", admin);
+        return "switch-case";
     }
 }
